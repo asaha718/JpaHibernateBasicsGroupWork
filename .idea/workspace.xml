@@ -7,8 +7,6 @@
     <list default="true" id="a08601dd-2305-4399-a27d-96bb8e6d2003" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/snippets/SnippetMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/snippets/SnippetMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/snippets/model/Snippet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/snippets/model/Snippet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/snippets/service/SnippetService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/snippets/service/SnippetService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +50,7 @@
       <recent name="org.example.shared.io.validation" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DecoratorExample">
+  <component name="RunManager" selected="Application.SnippetMain">
     <configuration name="DecoratorExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.bank.db.DecoratorExample" />
       <module name="GroupWork" />
@@ -79,8 +77,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SnippetMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.snippets.SnippetMain" />
+      <module name="JpaHibernateBasicsGroupWork" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.snippets.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SnippetMain" />
         <item itemvalue="Application.DecoratorExample" />
       </list>
     </recent_temporary>
