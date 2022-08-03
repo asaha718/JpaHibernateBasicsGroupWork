@@ -13,54 +13,73 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 public class SnippetMain {
-    public static void main(String[] args) throws Exception {
-//        UserOutputService userOutputService = new ConsoleUserOutputServiceImpl();
+    public static void main(String[] args) {
+        UserOutputService userOutputService = new ConsoleUserOutputServiceImpl();
+        UserInputService userInputService = new ConsoleUserInputServiceImpl(userOutputService);
 
-        getUserSnippetInput();
-//                String response = userInputService.getUserInput("Do you want to create another snippet (1) or search for snippet by title (2)?",
-//                        new NonBlankInputValidationRule());
-//
-//                if(response.equals("1"))
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("example");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
+        userOutputService.print("WELCOME");
+
+        try {
+            getUserSnippetInput(userInputService, userOutputService, entityManager);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        // close entity manager
+        entityManager.close();
+        entityManagerFactory.close();
     }
 
-    public static void getUserSnippetInput() throws Exception {
-        UserOutputService userOutputService = new ConsoleUserOutputServiceImpl();
+    public static void getUserSnippetInput(UserInputService userInputService, UserOutputService userOutputService, EntityManager entityManager) throws Exception {
+        String body = userInputService.getUserInput("PLEASE ENTER A CODE SNIPPET : ",
+                new NonBlankInputValidationRule());
+        String title = userInputService.getUserInput("WHAT IS A TITLE FOR THIS SNIPPET ? ",
+                new NonBlankInputValidationRule());
+        String tag = userInputService.getUserInput("WHAT IS A WORD TO REPRESENT THIS SNIPPET ? ",
+                new NonBlankInputValidationRule());
 
-        Boolean isSnippetLooping = true;
-        while (isSnippetLooping) {
-            try (UserInputService userInputService = new ConsoleUserInputServiceImpl(userOutputService)) {
-                userOutputService.print("WELCOME");
-                String body = userInputService.getUserInput("PLEASE ENTER A CODE SNIPPET : ",
-                        new NonBlankInputValidationRule());
-                String title = userInputService.getUserInput("WHAT IS A TITLE FOR THIS SNIPPET ? ",
-                        new NonBlankInputValidationRule());
-                String tag = userInputService.getUserInput("WHAT IS A WORD TO REPRESENT THIS SNIPPET ? ",
-                        new NonBlankInputValidationRule());
+        //create new instance of a snippet
+        Snippet newSnippet = new Snippet();
+        newSnippet.setBody(body);
+        newSnippet.setTitle(title);
+        newSnippet.setTag(tag);
 
+        // access transaction object (copy paste this when needed)
+        EntityTransaction transaction = entityManager.getTransaction();
 
-                //create new instance of a snippet
+        // create and use transactions (copy paste this when needed)
+        transaction.begin();
 
-                Snippet newSnippet = new Snippet();
-                newSnippet.setBody(body);
-                newSnippet.setTitle(title);
-                newSnippet.setTag(tag);
+        // Insert
+        entityManager.persist(newSnippet); // IMPORTANT!
 
-                // create EntityManager (copy paste this when needed)
-                EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("example");
-                EntityManager entityManager = entityManagerFactory.createEntityManager();
+        transaction.commit();
 
-                // access transaction object (copy paste this when needed)
-                EntityTransaction transaction = entityManager.getTransaction();
+        getMoreUserInput(userOutputService, userInputService, entityManager);
+    }
 
-                // create and use transactions (copy paste this when needed)
-                transaction.begin();
-
-                // Insert
-                entityManager.persist(newSnippet); // IMPORTANT!
-
-                transaction.commit();
+    public static void getMoreUserInput(UserOutputService userOutputService, UserInputService userInputService, EntityManager entityManager) throws Exception {
+        try (userInputService) {
+            String response = userInputService.getUserInput("Do you want to create another snippet (1) or search for snippet by title (2)?",
+                    new NonBlankInputValidationRule());
+            if (response.equals("1")) {
+                getUserSnippetInput(userInputService, userOutputService, entityManager);
+            } else if (response.equals("2")) {
+                searchUserSnippet(userInputService, userOutputService, entityManager);
             }
+        }
+    }
+
+    public static void searchUserSnippet(UserInputService userInputService, UserOutputService userOutputService, EntityManager entityManager) throws Exception {
+        try (userInputService) {
+            String title = userInputService.getUserInput("Enter the title of the snippet you'd like to search: ",
+                    new NonBlankInputValidationRule());
+
+            Snippet foundSnippet = entityManager.find(Snippet.class, );
+            System.out.println(foundSnippet);
         }
     }
 }
