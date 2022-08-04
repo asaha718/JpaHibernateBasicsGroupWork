@@ -9,4 +9,7 @@ import org.example.shared.io.validation.NonBlankInputValidationRule;
 import javax.persistence.*;
 
 public interface SnippetService {
+    void saveSnippet();
+    void saveMoreSnippets();
+    void findSnippetByTitle();
 }
