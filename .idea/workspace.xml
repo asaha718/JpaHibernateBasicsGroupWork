@@ -47,7 +47,7 @@
       <recent name="org.example.shared.io.validation" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.org.example.jaystuff.Main">
+  <component name="RunManager" selected="Application.DecoratorExample">
     <configuration name="DecoratorExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.bank.db.DecoratorExample" />
       <module name="GroupWork" />
@@ -76,7 +76,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.org.example.jaystuff.Main" />
         <item itemvalue="Application.DecoratorExample" />
       </list>
     </recent_temporary>
