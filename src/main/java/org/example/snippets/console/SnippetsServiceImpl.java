@@ -57,7 +57,7 @@ public class SnippetsServiceImpl implements SnippetService {
             if (response.equals("1")) {
                 saveSnippet();
             } else if (response.equals("2")) {
-                findSnippetByTitle();
+                System.out.println(findSnippetByTitle());
             }
         }
 

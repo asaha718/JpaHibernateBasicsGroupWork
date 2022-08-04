@@ -3,6 +3,7 @@ package org.example.snippets.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
