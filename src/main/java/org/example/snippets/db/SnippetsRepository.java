@@ -12,15 +12,6 @@ public class SnippetsRepository implements Repository<Snippet> {
     public SnippetsRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
-    public List<Snippet> findByTitle(String title) {
-        TypedQuery<Snippet> snippetResult =
-                entityManager.createQuery(
-                                "SELECT s FROM Snippet s WHERE s.title = :title"
-                                , Snippet.class)
-                        .setParameter("title", title);
-        List<Snippet> snippetList = snippetResult.getResultList();
-        return snippetList;
-    }
 
     @Override
     public Snippet save(Snippet snippet) {
@@ -38,5 +29,15 @@ public class SnippetsRepository implements Repository<Snippet> {
     @Override
     public Optional<Snippet> findById(Long id) {
         return Optional.empty();
+    }
+
+    public List<Snippet> findByTitle(String title) {
+        TypedQuery<Snippet> snippetResult =
+                entityManager.createQuery(
+                                "SELECT s FROM Snippet s WHERE s.title = :title"
+                                , Snippet.class)
+                        .setParameter("title", title);
+        List<Snippet> snippetList = snippetResult.getResultList();
+        return snippetList;
     }
 }
