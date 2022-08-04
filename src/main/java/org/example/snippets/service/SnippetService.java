@@ -5,11 +5,13 @@ import org.example.shared.io.UserOutputService;
 import org.example.shared.io.console.ConsoleUserInputServiceImpl;
 import org.example.shared.io.console.ConsoleUserOutputServiceImpl;
 import org.example.shared.io.validation.NonBlankInputValidationRule;
+import org.example.snippets.model.Snippet;
 
 import javax.persistence.*;
+import java.util.List;
 
 public interface SnippetService {
     void saveSnippet();
     void saveMoreSnippets();
-    void findSnippetByTitle();
+    List<Snippet> findSnippetByTitle();
 }

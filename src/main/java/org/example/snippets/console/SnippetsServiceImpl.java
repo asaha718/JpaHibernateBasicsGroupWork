@@ -9,6 +9,7 @@ import org.example.snippets.service.SnippetService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.util.List;
 
 public class SnippetsServiceImpl implements SnippetService {
     private UserOutputService userOutputService;
@@ -61,9 +62,10 @@ public class SnippetsServiceImpl implements SnippetService {
         }
 
     @Override
-    public void findSnippetByTitle() {
+    public List<Snippet> findSnippetByTitle() {
         String title = userInputService.getUserInput("What is the title of the snippet you are searching ? ",
                 new NonBlankInputValidationRule());
-        snippetsRepository.findByTitle(title);
+        List<Snippet> snippetsList = snippetsRepository.findByTitle(title);
+        return snippetsList;
     }
 }
